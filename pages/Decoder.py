@@ -1,4 +1,7 @@
 import streamlit as st
+from PIL import Image
+import numpy as np
+
 lst = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 def decoder(sentence, key):
@@ -16,6 +19,9 @@ def decoder(sentence, key):
     return decoded_string
 
 def app():
+    display = Image.open('decoded.webp')
+    display = np.array(display)
+    st.image(display)
     header=st.container()
     result_all = st.container()
     with header:

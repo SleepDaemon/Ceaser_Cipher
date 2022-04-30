@@ -1,4 +1,7 @@
 import streamlit as st
+from PIL import Image
+import numpy as np
+
 lst = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 def encoder(sentence, key):
@@ -16,6 +19,9 @@ def encoder(sentence, key):
     return encoded_string
 
 def app():
+    display = Image.open('encoded.jpg')
+    display = np.array(display)
+    st.image(display)
     header=st.container()
     result_all = st.container()
     with header:

@@ -5,14 +5,14 @@ import numpy as np
 # Custom imports 
 from multipage import MultiPage
 
-from pages import Encoder, Decoder
+from pages import Encoder, Decoder, Content, GuessNumber
 # Create an instance of the app 
 app = MultiPage()
 
 # Title of the main page
-display = Image.open('cover.jpg')
-display = np.array(display)
-st.image(display)
+# display = Image.open('cover.jpg')
+# display = np.array(display)
+# st.image(display)
 st.title("Ceaser Cipher")
 st.text("Encrypt or Decrypt using Ceaser Cipher")
 
@@ -22,10 +22,10 @@ st.text("Encrypt or Decrypt using Ceaser Cipher")
 # col2.title("Data Storyteller Application")
 
 # Add all your application here
+app.add_page("Content", Content.app)
 app.add_page("Encoder", Encoder.app)
 app.add_page("Decoder", Decoder.app)
-# app.add_page("Detect Disaster Type", detectDisaster.app)
-
+app.add_page("Guess Number", GuessNumber.app)
 
 # The main app
 app.run()
