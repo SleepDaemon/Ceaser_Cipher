@@ -4,58 +4,66 @@ from PIL import Image
 import numpy as np
 import random
 
-if 'num' not in st.session_state:
-    st.session_state['num'] = random.randint(1,20)
-
-#num=random.randint(1,20)
-guesses=[]
-guesses_result=[]
+guesses_result_local=[]
 
 def app():
-    if "num" not in st.session_state:
-        st.session_state['num'] = random.randint(1,20)
-
-    num=st.session_state['num']
     result=""
     display = Image.open('encoded.jpg')
     display = np.array(display)
     st.image(display)
 
     header=st.container()
-    result_all = st.container()
 
+    
     with header:
-        guess= st.text_input("Enter your Guess (1-20)",value="0")
-        guess= int(guess)
+        guess= st.text_input("Enter your Guess (1-20)",value="")
+
         #Computer doesn't check for zero
-        if guess!=0:
+        if guess!="":
             print (guess)
+            guess= int(guess)
             st.write("Number Guessed:", guess)
-            guesses.append(guess)
-            if guess > num:
+            
+            if guess > st.session_state['num']:
                 result="Too High"
-            elif guess < num:
+            elif guess < st.session_state['num']:
                 result="Too Low"
-            elif guess == num:
+
+            if guess!=st.session_state['num']:
+                print("Result:",result)
+                st.session_state['guesses'].append(guess)
+                print("Session Values:", st.session_state['guesses'])
+            else:
                 #Game Reset (clears result and guess list)
                 result="Correct"
-                guesses.clear()
-                guesses_result.clear()
+                st.session_state['guesses'].clear()
+                guesses_result_local.clear()
                 st.session_state['num'] = random.randint(1,20)
-                num=st.session_state['num']
-                print("New random number is ",num)
-        
-            guesses_result.append(result)
+                
+                print("New random number is ",st.session_state['num'])
+            
             st.write(result)
-            print("Answer:", num)
+            print("Answer:", st.session_state['num'])
             st.write("Guesses so far:")
-            guesses_string=", ".join(str(x) for x in guesses)
+            guesses_string=", ".join(str(x) for x in st.session_state['guesses'])
             st.write(guesses_string)
-            #To get rid of correct from the final result string
-            if "Correct" in guesses_result:
-                guesses_result.remove("Correct")
 
-            guesses_result_string=", ".join(str(x) for x in guesses_result)
+            guesses_result_local.clear()
+            # lets use the st.session_state['guesses'] variable to calculate the guesses result
+            for guess_value in st.session_state['guesses']:
+                if guess_value > st.session_state['num']:
+                    guesses_result_local.append("Too High")
+                elif guess_value < st.session_state['num']:
+                    guesses_result_local.append("Too Low")
+                else:
+                    guesses_result_local.append("Correct")
+                
+            #To get rid of correct from the final result string
+            if "Correct" in guesses_result_local:
+                guesses_result_local.remove("Correct")
+            
+            guesses_result_string=", ".join(str(x) for x in guesses_result_local)
+
             st.write(guesses_result_string)
 
     

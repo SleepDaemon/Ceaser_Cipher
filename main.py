@@ -2,6 +2,7 @@ import os
 import streamlit as st
 from PIL import Image
 import numpy as np
+import random
 # Custom imports 
 from multipage import MultiPage
 
@@ -27,5 +28,12 @@ app.add_page("Encoder", Encoder.app)
 app.add_page("Decoder", Decoder.app)
 app.add_page("Guess Number", GuessNumber.app)
 
+
+if 'num' not in st.session_state:
+    st.session_state['num'] = random.randint(1,20)
+if 'guesses' not in st.session_state:
+    st.session_state['guesses'] = []
+if 'gueses_result' not in st.session_state:
+    st.session_state['guesses_result'] = []
 # The main app
 app.run()
