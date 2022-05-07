@@ -6,7 +6,7 @@ import random
 # Custom imports 
 from multipage import MultiPage
 
-from pages import Encoder, Decoder, Content, GuessNumber
+from pages import Encoder, Decoder, Content, GuessNumber, AlphaBetaGamma
 # Create an instance of the app 
 app = MultiPage()
 
@@ -14,8 +14,8 @@ app = MultiPage()
 # display = Image.open('cover.jpg')
 # display = np.array(display)
 # st.image(display)
-st.title("Ceaser Cipher")
-st.text("Encrypt or Decrypt using Ceaser Cipher")
+st.title("Games in Python")
+st.text("Play games that were written in Python!")
 
 # col1 = st.columns(1)
 # col1, col2 = st.columns(2)
@@ -23,17 +23,30 @@ st.text("Encrypt or Decrypt using Ceaser Cipher")
 # col2.title("Data Storyteller Application")
 
 # Add all your application here
+app.add_page("Alpha Beta Gamma", AlphaBetaGamma.app)
 app.add_page("Content", Content.app)
 app.add_page("Encoder", Encoder.app)
 app.add_page("Decoder", Decoder.app)
 app.add_page("Guess Number", GuessNumber.app)
 
-
+#Session State for GuessNumber
 if 'num' not in st.session_state:
     st.session_state['num'] = random.randint(1,20)
 if 'guesses' not in st.session_state:
     st.session_state['guesses'] = []
 if 'gueses_result' not in st.session_state:
     st.session_state['guesses_result'] = []
+
+# Seession State for AlphaBetaGamma
+lst = random.sample(range(0, 9), 3)
+lst2=[]
+for val in lst:
+    lst2.append(str(val))
+lst=lst2
+if 'AlphaBetaGamma_list' not in st.session_state:
+    st.session_state['AlphaBetaGamma_list'] = lst
+if 'AlphaBetaGamma_guesses' not in st.session_state:
+    st.session_state['AlphaBetaGamma_guesses'] = []
+
 # The main app
 app.run()
