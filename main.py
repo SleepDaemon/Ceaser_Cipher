@@ -45,6 +45,7 @@ for val in lst:
 lst=lst2
 if 'AlphaBetaGamma_list' not in st.session_state:
     st.session_state['AlphaBetaGamma_list'] = lst
+print("3 digits", st.session_state['AlphaBetaGamma_list'])
 if 'AlphaBetaGamma_guesses' not in st.session_state:
     st.session_state['AlphaBetaGamma_guesses'] = []
 

@@ -3,6 +3,7 @@ from PIL import Image
 import numpy as np
 import random
 
+List_hints=[]
 
 def alpha_beta_gamma_checker(user_guess):
     hints=[]
@@ -40,6 +41,8 @@ def app():
 
 
     header=st.container()
+    solutions=st.container()
+
     with instruction_container:
         st.header("AlphaBetaGamma Instructions")
         st.text("I am thinking of a 3-digit number. Try to guess what it is. ,")
@@ -52,7 +55,8 @@ When I say:    That means:
     
     with header:
         user_guess= st.text_input("Enter your Guess (3-digit)",value="")
-    
+        global List_hints
+
         if user_guess!="":
             print(user_guess)
             st.session_state['AlphaBetaGamma_guesses'].append(user_guess)
@@ -62,4 +66,11 @@ When I say:    That means:
                 hints=alpha_beta_gamma_checker(user_guess)
                 List_hints.append(hints)
             print("Hints Till now", List_hints)
-        
+    
+    with solutions:
+        st.header("Solutions")
+
+        for i in range( len(List_hints)):
+            List_hints_string=", ".join(str(x) for x in List_hints[i])
+
+            st.write(st.session_state['AlphaBetaGamma_guesses'][i], List_hints_string)
