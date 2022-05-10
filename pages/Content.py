@@ -9,4 +9,5 @@ def app():
     st.title("Play Games Built in Python")
     st.subheader('Ceaser Cipher')
     st.subheader('Guess the Number')
+    st.subheader('Alpha Beta Gamma')
     st.caption('Select Game from Sidebar')
