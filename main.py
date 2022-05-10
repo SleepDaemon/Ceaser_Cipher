@@ -23,11 +23,11 @@ st.text("Play games that were written in Python!")
 # col2.title("Data Storyteller Application")
 
 # Add all your application here
-app.add_page("Alpha Beta Gamma", AlphaBetaGamma.app)
 app.add_page("Content", Content.app)
 app.add_page("Encoder", Encoder.app)
 app.add_page("Decoder", Decoder.app)
 app.add_page("Guess Number", GuessNumber.app)
+app.add_page("Alpha Beta Gamma", AlphaBetaGamma.app)
 
 #Session State for GuessNumber
 if 'num' not in st.session_state:
