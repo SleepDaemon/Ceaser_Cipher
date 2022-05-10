@@ -19,6 +19,8 @@ def encoder(sentence, key):
     return encoded_string
 
 def app():
+    st.title("Encoder Game")
+    st.text("This allows you to encode a sentence or word using a key.")
     display = Image.open('encoded.jpg')
     display = np.array(display)
     st.image(display)

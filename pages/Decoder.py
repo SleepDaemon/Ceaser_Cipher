@@ -25,6 +25,8 @@ def app():
     header=st.container()
     result_all = st.container()
     with header:
+        st.title("Decoder Game")
+        st.text("This allows you to decode a sentence or word using a key.")
         sentence= st.text_input("Text to be decrypted")
         key= st.text_input("Enter the key",value="0")
         key= int(key)

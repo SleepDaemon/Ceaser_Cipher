@@ -7,8 +7,10 @@ import random
 guesses_result_local=[]
 
 def app():
+    st.title("Guess the Number")
+    st.text("This is a game that will allow you to guess a number between 1 and 20.")
     result=""
-    display = Image.open('encoded.jpg')
+    display = Image.open('guessnumber.jpeg')
     display = np.array(display)
     st.image(display)
 

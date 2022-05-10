@@ -1,7 +1,6 @@
 import streamlit as st
 from PIL import Image
 import numpy as np
-import random
 
 List_hints=[]
 
@@ -33,8 +32,9 @@ def alpha_beta_gamma_checker(user_guess):
     return hints
 
 def app():
-    result=""
-    display = Image.open('encoded.jpg')
+    st.title("Alpha Beta Gamma")
+    st.text("Guess 3 digit number")
+    display = Image.open('alphabetagamma.png')
     display = np.array(display)
     st.image(display)
     instruction_container=st.container()
@@ -57,7 +57,7 @@ When I say:    That means:
         user_guess= st.text_input("Enter your Guess (3-digit)",value="")
         global List_hints
 
-        if user_guess!="":
+        if user_guess!="" and len(user_guess)==3:
             print(user_guess)
             st.session_state['AlphaBetaGamma_guesses'].append(user_guess)
             print("Guesses Till now", st.session_state['AlphaBetaGamma_guesses'])
