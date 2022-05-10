@@ -1,8 +1,11 @@
+from unittest import result
 import streamlit as st
 from PIL import Image
 import numpy as np
+import random
 
 List_hints=[]
+
 
 def alpha_beta_gamma_checker(user_guess):
     hints=[]
@@ -32,6 +35,7 @@ def alpha_beta_gamma_checker(user_guess):
     return hints
 
 def app():
+    result = False
     st.title("Alpha Beta Gamma")
     st.text("Guess 3 digit number")
     display = Image.open('alphabetagamma.png')
@@ -65,12 +69,24 @@ When I say:    That means:
             for user_guess in st.session_state['AlphaBetaGamma_guesses']:
                 hints=alpha_beta_gamma_checker(user_guess)
                 List_hints.append(hints)
+            result=all(element=='Alpha' for element in hints)
             print("Hints Till now", List_hints)
     
     with solutions:
         st.header("Solutions")
+        if result == False:
+            for i in range( len(List_hints)):
+                List_hints_string=", ".join(str(x) for x in List_hints[i])
+                st.write(st.session_state['AlphaBetaGamma_guesses'][i], List_hints_string)
+        print("res",result)
 
-        for i in range( len(List_hints)):
-            List_hints_string=", ".join(str(x) for x in List_hints[i])
-
-            st.write(st.session_state['AlphaBetaGamma_guesses'][i], List_hints_string)
+        if result == True:
+            List_hints.clear()
+            st.session_state['AlphaBetaGamma_guesses'].clear()
+            st.caption("Correct!, Next Level")
+            lst = random.sample(range(0, 9), 3)
+            lst2=[]
+            for val in lst:
+                lst2.append(str(val))
+            lst=lst2
+            st.session_state['AlphaBetaGamma_list'] = lst
